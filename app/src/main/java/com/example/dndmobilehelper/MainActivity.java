@@ -22,6 +22,10 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
@@ -43,13 +47,26 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
+
+        DnDFileHandler.getInstance().setContext(this);
+
+        MasterList.CreateFileIfNotExist();
+
+        try {
+            MasterList.getInstance().load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void setupViewPager(ViewPager viewPager)
     {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentCharacter(), "Characters");
-        adapter.addFragment(new FragmentCombat(), "Combats");
+        adapter.addFragment(new CharacterListFragment(), "Characters");
+        adapter.addFragment(new CombatListFragment(), "Combats");
 
         viewPager.setAdapter(adapter);
     }

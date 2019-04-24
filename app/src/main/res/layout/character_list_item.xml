@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:id="@+id/parent_layout">
+
+    <TextView
+        android:id="@+id/character_ac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AC"
+        android:textSize="45sp"
+        android:textColor="#000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/ac_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/character_ac"
+        app:layout_constraintRight_toRightOf="@id/character_ac"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="AC"
+        android:textColor="#000"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/character_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/character_ac"
+        app:layout_constraintRight_toLeftOf="@id/character_init"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/character_ac"
+        android:text="NAME OF MONSTER"
+        android:textColor="#000"
+        android:textSize="17sp"
+        />
+
+    <TextView
+        android:id="@+id/character_init"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/character_ac"
+        android:text="IN"
+        android:textColor="#000"
+        android:textSize="45sp"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/initiative_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/character_init"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/character_init"
+        android:text="Init"
+        android:textColor="#000"
+        android:textSize="16sp"/>
+
+
+</android.support.constraint.ConstraintLayout>
