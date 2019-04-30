@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application/character.dart';
+import 'package:flutter_application/scroll_list_character.dart';
 
 class DnDTabbedPage extends StatefulWidget {
   const DnDTabbedPage({Key key}) : super(key: key);
@@ -10,7 +12,7 @@ class DnDTabbedPage extends StatefulWidget {
 
 class _DnDTabbedPageState extends State<DnDTabbedPage> with SingleTickerProviderStateMixin {
   final List<Tab> _tabs = <Tab>[
-  Tab(text: "Char",),
+  Tab(text: "Char"),
   Tab(text: "Comb",)
   ];
 
@@ -41,7 +43,7 @@ class _DnDTabbedPageState extends State<DnDTabbedPage> with SingleTickerProvider
       body: TabBarView(
         controller: _tabController,
         children: _tabs.map((Tab tab) {
-          return Center(child: Text(tab.text));
+          return Center(child: CharacterScrollList());
         }).toList(),
       ),
       );

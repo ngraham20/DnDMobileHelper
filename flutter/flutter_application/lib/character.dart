@@ -1,5 +1,7 @@
 // the character class file
 
+import 'package:flutter/widgets.dart';
+
 class Character {
   String name;
   int hp;

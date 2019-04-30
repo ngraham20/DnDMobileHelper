@@ -12,6 +12,10 @@ class CharacterScrollList extends StatefulWidget {
 class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin {
   final List<CharacterListItem> _list_characters = <CharacterListItem>[];
 
+  CSLState() {
+    _initializeDefaults();
+  }
+
   @override
   void dispose() {
     for (CharacterListItem item in _list_characters)
@@ -19,6 +23,15 @@ class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin 
         item.animationController.dispose();
       }
     super.dispose();
+  }
+
+  void _initializeDefaults() {
+    _insertCharacter(
+      Character("James", 25, 35, 65));
+
+    _insertCharacter(
+      Character("Nathaniel", 25, 35, 65)
+    );
   }
 
   void _insertCharacter(Character character) {
@@ -37,8 +50,26 @@ class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin 
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return null;
+    return Container(
+      child: new Column(
+          children: <Widget>[
+            new Flexible(
+                child: new ListView.builder(
+                  padding: new EdgeInsets.all(8.0),
+                  reverse: true,
+                  itemBuilder: (_, int index) => _list_characters[index],
+                  itemCount: _list_characters.length,
+                )
+            ),
+          ]
+      ),
+      decoration: Theme.of(context).platform == TargetPlatform.iOS
+          ? new BoxDecoration(
+        border: new Border(
+          top: new BorderSide(color: Colors.grey[200]),
+        ),
+      )
+          : null,);
   }
 
 }
