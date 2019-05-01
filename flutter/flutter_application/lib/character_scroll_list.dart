@@ -10,18 +10,24 @@ class CharacterScrollList extends StatefulWidget {
 }
 
 class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin {
-  final List<CharacterListItem> _list_characters = <CharacterListItem>[];
+  List<CharacterListItem> listCharacters = <CharacterListItem>[];
+  AnimationController _animationController;
 
 
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+        duration: Duration(milliseconds: 700),
+        vsync: this
+    );
+
     _initializeDefaults();
   }
 
   @override
   void dispose() {
-    for (CharacterListItem item in _list_characters)
+    for (CharacterListItem item in listCharacters)
       {
         item.animationController.dispose();
       }
@@ -29,26 +35,37 @@ class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin 
   }
 
   void _initializeDefaults() {
-    _insertCharacter(
-      Character("James", 25, 35, 65));
-
-    _insertCharacter(
+    List<Character> items = <Character>[
+      Character("James", 25, 35, 65),
       Character("Nathaniel", 25, 35, 65)
-    );
+    ];
+
+    _setCharacters(items);
+  }
+
+  void _setCharacters(List<Character> characters) {
+    List<CharacterListItem> items = <CharacterListItem>[];
+    for (var character in characters) {
+      CharacterListItem item = CharacterListItem(
+        character: character,
+        animationController: _animationController
+      );
+
+      items.add(item);
+    }
+    setState(() {listCharacters = items;});
+    _animationController.forward();
   }
 
   void _insertCharacter(Character character) {
-    CharacterListItem newItem = CharacterListItem(
+    CharacterListItem item = CharacterListItem(
       character: character,
-      animationController: AnimationController(
-        duration: Duration(milliseconds: 700),
-        vsync: this
-      ),
+      animationController: _animationController
     );
     setState(() {
-      _list_characters.insert(0, newItem);
+      listCharacters.insert(0, item);
     });
-    newItem.animationController.forward();
+    item.animationController.forward();
   }
 
   @override
@@ -59,9 +76,8 @@ class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin 
             new Flexible(
                 child: new ListView.builder(
                   padding: new EdgeInsets.all(8.0),
-                  reverse: true,
-                  itemBuilder: (_, int index) => _list_characters[index],
-                  itemCount: _list_characters.length,
+                  itemBuilder: (_, int index) => listCharacters[index],
+                  itemCount: listCharacters.length,
                 )
             ),
           ]
