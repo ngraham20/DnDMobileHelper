@@ -4,23 +4,18 @@ import 'package:flutter_application/character_list_item.dart';
 import 'character.dart';
 
 class CharacterScrollList extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() => CSLState();
-
 }
 
 class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin {
   List<CharacterListItem> listCharacters = <CharacterListItem>[];
-  AnimationController _animationController;
 
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-        duration: Duration(milliseconds: 700),
-        vsync: this
-    );
 
     _initializeDefaults();
   }
@@ -48,19 +43,26 @@ class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin 
     for (var character in characters) {
       CharacterListItem item = CharacterListItem(
         character: character,
-        animationController: _animationController
+        animationController: AnimationController(
+            duration: Duration(milliseconds: 700),
+            vsync: this
+        )
       );
 
       items.add(item);
+      item.animationController.forward();
     }
     setState(() {listCharacters = items;});
-    _animationController.forward();
+
   }
 
   void _insertCharacter(Character character) {
-    CharacterListItem item = CharacterListItem(
+    CharacterListItem item = new CharacterListItem(
       character: character,
-      animationController: _animationController
+      animationController: AnimationController(
+          duration: Duration(milliseconds: 700),
+          vsync: this
+      )
     );
     setState(() {
       listCharacters.insert(0, item);
@@ -70,25 +72,34 @@ class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: new Column(
-          children: <Widget>[
-            new Flexible(
-                child: new ListView.builder(
-                  padding: new EdgeInsets.all(8.0),
-                  itemBuilder: (_, int index) => listCharacters[index],
-                  itemCount: listCharacters.length,
-                )
-            ),
-          ]
-      ),
-      decoration: Theme.of(context).platform == TargetPlatform.iOS
-          ? new BoxDecoration(
-        border: new Border(
-          top: new BorderSide(color: Colors.grey[200]),
+    return Scaffold(
+      body: Container(
+        child: new Column(
+            children: <Widget>[
+              new Flexible(
+                  child: new ListView.builder(
+                    padding: new EdgeInsets.all(8.0),
+                    itemBuilder: (_, int index) => listCharacters[index],
+                    itemCount: listCharacters.length,
+                  )
+              ),
+            ]
         ),
-      )
-          : null,);
+        decoration: Theme.of(context).platform == TargetPlatform.iOS
+            ? new BoxDecoration(
+          border: new Border(
+            top: new BorderSide(color: Colors.grey[200]),
+          ),
+        )
+            : null,),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        margin: const EdgeInsets.symmetric(vertical: 24.0),
+        child: FloatingActionButton(
+          onPressed: () {_insertCharacter(Character("DEFAULT", 1, 1, 1));},
+          child: Icon(Icons.add, color: Colors.white,),
+        ),
+      ),
+    );
   }
-
 }

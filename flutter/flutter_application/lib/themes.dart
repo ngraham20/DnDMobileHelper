@@ -8,6 +8,7 @@ final ThemeData dndIOSTheme = new ThemeData(
 );
 
 final ThemeData dndAndroidTheme = new ThemeData(
-  primarySwatch: Colors.brown,
-  accentColor: Colors.transparent,
+  primarySwatch: Colors.grey,
+  primaryColor: Colors.red[800],
+  accentColor: Colors.amber[700],
 );

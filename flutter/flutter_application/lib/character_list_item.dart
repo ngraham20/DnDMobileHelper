@@ -15,8 +15,8 @@ class CharacterListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new SizeTransition(
-        sizeFactor: new CurvedAnimation(
+    return SizeTransition(
+        sizeFactor: CurvedAnimation(
             parent: animationController, curve: Curves.easeOut),
         child: new Container(
           decoration: BoxDecoration(
@@ -33,27 +33,45 @@ class CharacterListItem extends StatelessWidget {
               children: <Widget>[
                 new Container(
                   margin: const EdgeInsets.only(right: 16.0, left: 8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor,
-                      borderRadius: BorderRadius.all(const Radius.circular(5.0))
-                    ),
-                    child: Text(
-                      character.ac.toString(),
-                      style: TextStyle(fontSize: 35.0),
-                    ),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(const Radius.circular(5.0))
+                        ),
+                        child: Text(
+                          character.ac.toString(),
+                          style: TextStyle(fontSize: 35.0),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          "AC",
+                          style: TextStyle(fontSize: 13.0),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 new Container(
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor,
-                        borderRadius: BorderRadius.all(const Radius.circular(5.0))
-                    ),
-                    child: Text(
-                      character.hp.toString(),
-                      style: TextStyle(fontSize: 35.0),
-                    ),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(const Radius.circular(5.0))
+                        ),
+                        child: Text(
+                          character.hp.toString(),
+                          style: TextStyle(fontSize: 35.0),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          "HP",
+                          style: TextStyle(fontSize: 13.0),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 new Expanded(
@@ -87,21 +105,19 @@ class CharacterListItem extends StatelessWidget {
                           ),
                         ),
                       Container(
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).accentColor,
-                            borderRadius: BorderRadius.only(
-                                topRight: const Radius.circular(5.0),
-                                topLeft: const Radius.circular(5.0),
-                                bottomRight: const Radius.circular(5.0),
-                                bottomLeft: const Radius.circular(5.0)
-                            )
-                        ),
-                          child: Container(
-                            margin: EdgeInsets.all(2.0),
-                            child: Text(
-                              character.init.toString(),
-                              style: TextStyle(fontSize: 14.0),
-                            ),
+                          child: Row(
+                            children: <Widget>[
+                              Text("Init:"),
+                              Container(
+                                margin: EdgeInsets.all(2.0),
+                                child: Text(
+                                  character.init.toString(),
+                                  style: TextStyle(
+                                      fontSize: 14.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                     ],
