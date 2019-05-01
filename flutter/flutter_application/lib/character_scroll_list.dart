@@ -12,7 +12,10 @@ class CharacterScrollList extends StatefulWidget {
 class CSLState extends State<CharacterScrollList> with TickerProviderStateMixin {
   final List<CharacterListItem> _list_characters = <CharacterListItem>[];
 
-  CSLState() {
+
+  @override
+  void initState() {
+    super.initState();
     _initializeDefaults();
   }
 

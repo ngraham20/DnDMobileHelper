@@ -1,4 +1,4 @@
-// this widget describes the list item of a character
+ // this widget describes the list item of a character
 
 import 'package:flutter/material.dart';
 import 'character.dart';
@@ -29,7 +29,7 @@ class CharacterListItem extends StatelessWidget {
                     new Text("James", style: Theme.of(context).textTheme.subhead),
                     new Container(
                       margin: const EdgeInsets.only(top: 5.0),
-                      child: new Text("Ummm"),
+                      child: new Text(character.name),
                     ),
                   ],
                 ),
