@@ -32,16 +32,11 @@ class CharacterListItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 new Container(
-                  margin: const EdgeInsets.only(right: 8.0),
+                  margin: const EdgeInsets.only(right: 16.0, left: 8.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).accentColor,
-                      borderRadius: BorderRadius.only(
-                        topRight: const Radius.circular(5.0),
-                        topLeft: const Radius.circular(5.0),
-                        bottomRight: const Radius.circular(5.0),
-                        bottomLeft: const Radius.circular(5.0)
-                      )
+                      borderRadius: BorderRadius.all(const Radius.circular(5.0))
                     ),
                     child: Text(
                       character.ac.toString(),
@@ -50,7 +45,6 @@ class CharacterListItem extends StatelessWidget {
                   ),
                 ),
                 new Container(
-                  margin: const EdgeInsets.only(right: 8.0),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Theme.of(context).accentColor,
