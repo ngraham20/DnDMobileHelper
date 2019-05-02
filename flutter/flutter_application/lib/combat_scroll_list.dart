@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'combat_list_item.dart';
-import 'character.dart';
+import 'combat.dart';
 
 class CombatScrollList extends StatefulWidget {
 
@@ -30,35 +30,65 @@ class CSLState extends State<CombatScrollList> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: new Column(
-          children: <Widget>[
-            new Flexible(
-                child: new ListView.builder(
-                  padding: new EdgeInsets.all(8.0),
-                  itemBuilder: (_, int index) => _listCombats[index],
-                  itemCount: _listCombats.length,
-                )
-            ),
-          ]
+    return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add, color: Colors.white),
+          )
+        ],
+      ),
+      body: Container(
+        child: new Column(
+            children: <Widget>[
+              Flexible(
+                  child: new ListView.builder(
+                    padding: new EdgeInsets.all(8.0),
+                    itemBuilder: (_, int index) => _listCombats[index],
+                    itemCount: _listCombats.length,
+                  )
+              ),
+              Container(
+                width: double.infinity,
+                height: 55.0,
+                color: Theme.of(context).primaryColor,
+                child: Container(
+                  margin: EdgeInsets.all(5.0),
+                  child: RaisedButton(
+                      color: Colors.blueGrey[700],
+                      elevation: 4.0,
+                      splashColor: Theme.of(context).buttonColor,
+                      onPressed: () {},
+                      child: Text(
+                        "Your Characters",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0
+                        ),
+                      )
+                  ),
+                ),
+              ),
+            ]
+        ),
       ),
     );
   }
 
   void _initializeDefaults() {
-    List<Character> items = <Character>[
-      Character("James", 25, 35, 65),
-      Character("Nathaniel", 25, 35, 65)
+    List<Combat> items = <Combat>[
+      Combat("Combat1"),
+      Combat("Combat2")
     ];
 
     _setCombats(items);
   }
 
-  void _setCombats(List<Character> Combats) {
+  void _setCombats(List<Combat> combats) {
     List<CombatListItem> items = <CombatListItem>[];
-    for (var Combat in Combats) {
+    for (var Combat in combats) {
       CombatListItem item = CombatListItem(
-          character: Combat,
+          combat: Combat,
           animationController: AnimationController(
               duration: Duration(milliseconds: 700),
               vsync: this
